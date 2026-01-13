@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduvest - Educations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #f0d18a;
+            background-image: url('Image/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .overlay {
+            background-color: rgba(10, 15, 30, 0.88);
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: rgba(10, 15, 30, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #f0d18a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 35px;
+            height: auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        ul li a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        ul li a:hover, ul li a.active {
+            color: white;
+        }
+
+        /* Header Section */
+        .education-header {
+            text-align: center;
+            padding: 100px 50px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .education-header h1 {
+            font-size: 40px;
+            color: #f0d18a;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .education-header p {
+            color: #f5deb3;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* Card Section */
+        .education-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 0 80px 100px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            padding: 30px 25px 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .card h3 {
+            color: #f0d18a;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #f5deb3;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Tombol Read More */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d4af37;
+            color: #0a0f1e;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #f0d18a;
+        }
+
+        @media (max-width: 992px) {
+            .education-header {
+                padding: 80px 40px 40px;
+            }
+
+            .education-cards {
+                padding: 0 40px 80px;
+            }
+
+            .card {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px 40px;
+                gap: 10px;
+            }
+
+            .education-header h1 {
+                font-size: 32px;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <nav>
+            <div class="logo">
+                <img src="Image/Logo Web.jpg" alt="logo">
+                EDUVEST
+            </div>
+            <ul>
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="educations.html" class="active">EDUCATIONS</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Section -->
+        <section class="education-header">
+            <h1>EDUCATIONS</h1>
+            <p>
+                Belajar investasi saham tidak harus rumit.  
+                Di sini, kamu akan menemukan panduan mudah dan terstruktur untuk memahami dasar investasi, analisis saham, serta cara mengelola risiko dengan bijak.  
+                Mari mulai perjalananmu menuju kebebasan finansial!
+            </p>
+        </section>
+
+        <!-- Card Section -->
+        <section class="education-cards">
+            <div class="card">
+                <img src="Image/edu1.jpg" alt="Pengantar Investasi">
+                <h3>Pengantar Investasi</h3>
+                <p>Pelajari dasar investasi, manfaatnya, serta bagaimana cara memulai berinvestasi di pasar modal dengan aman dan efektif.</p>
+                <a href="pengantar.html" class="btn">READ MORE</a>
+            </div>
+
+            <div class="card">
+                <img src="Image/edu2.jpg" alt="Analisis Saham">
+                <h3>Analisis Saham</h3>
+                <p>Pahami cara membaca laporan keuangan, mengenal rasio penting, dan menentukan saham yang memiliki potensi terbaik.</p>
+                <a href="analisis.html" class="btn">READ MORE</a>
+            </div>
+
+            <div class="card">
+                <img src="Image/edu3.jpg" alt="Manajemen Risiko">
+                <h3>Manajemen Risiko</h3>
+                <p>Kenali risiko dalam investasi dan pelajari strategi untuk mengelolanya agar keputusanmu tetap cerdas dan terukur.</p>
+                <a href="manage.html" class="btn">READ MORE</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

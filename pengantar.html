@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eduvest - Educations (Interaktif)</title>
+  <style>
+    :root{
+      --bg:#131e3d;
+      --accent:#d4af37;
+      --gold:#f0d18a;
+      --muted:#f5deb3;
+      --card-bg: rgba(255,255,255,0.03);
+      --glass: rgba(10,15,30,0.88);
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      background:
+        linear-gradient(180deg, rgba(19,30,61,0.65), rgba(19,30,61,0.65)),
+        url('Image/background.jpg') center/cover fixed no-repeat;
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Header - sama seperti Home */
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 72px;
+      background: rgba(10,15,30,0.9);
+      z-index:100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;color:var(--gold);
+      font-weight:700; font-size:20px; letter-spacing:1px;
+    }
+    .brand img{width:36px; height:auto; display:block}
+    nav a{
+      color:var(--accent);
+      text-decoration:none;
+      margin:0 18px;
+      font-weight:600;
+      transition:color .2s var(--ease);
+    }
+    nav a:hover, nav a.active{ color: #fff; }
+
+    /* Page container */
+    .wrap{
+      padding:120px 6% 80px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:36px;
+    }
+    .hero h1{
+      color:var(--gold);
+      font-size:34px;
+      margin-bottom:8px;
+      letter-spacing:1px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:900px;
+      margin:0 auto;
+      line-height:1.7;
+    }
+
+    /* Cards grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+      margin-top:34px;
+    }
+
+    .card{
+      background:var(--card-bg);
+      border: 1px solid rgba(212,175,55,0.12);
+      padding:20px;
+      border-radius:12px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      min-height:160px;
+    }
+    .card:hover{ transform:translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,0.55); }
+
+    .card .meta{
+      display:flex; align-items:center; gap:12px; margin-bottom:8px;
+    }
+    .icon{
+      width:56px; height:56px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.14), rgba(255,255,255,0.02));
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;color:var(--gold);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3) inset;
+    }
+    .card h3{ color:var(--gold); margin:0 0 6px; font-size:18px; }
+    .card .excerpt{ color:var(--muted); line-height:1.6; font-size:15px; min-height:54px; }
+
+    .card .actions{ margin-top:16px; display:flex; justify-content:flex-start; gap:12px; align-items:center; }
+    .btn{
+      display:inline-block;
+      padding:9px 16px;
+      background:var(--accent);
+      color:#071122;
+      font-weight:700;
+      border-radius:8px;
+      text-decoration:none;
+      cursor:pointer;
+      transition: background .18s var(--ease), transform .12s var(--ease);
+    }
+    .btn:hover{ background:var(--gold); transform: translateY(-2px); }
+
+    /* Expand area */
+    .details{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .45s var(--ease), opacity .35s var(--ease);
+      opacity:0;
+      margin-top:12px;
+    }
+    .details.open{
+      opacity:1;
+      /* max-height set via JS to content scrollHeight */
+    }
+
+    .details .content{
+      padding-top:12px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    /* Nice separators */
+    .sep{
+      height:2px; width:60px; background:linear-gradient(90deg,var(--accent), rgba(212,175,55,0.5)); margin:12px 0 18px;
+      border-radius:6px;
+    }
+
+    /* Table styling inside details */
+    .details table{
+      width:100%; border-collapse:collapse; margin:12px 0 18px;
+      background: rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.12);
+    }
+    .details th, .details td{
+      padding:10px 12px; text-align:left; color:var(--muted); border-bottom:1px solid rgba(212,175,55,0.06);
+    }
+    .details th{ color:var(--gold); background: rgba(212,175,55,0.06); }
+
+    /* Fade-in on scroll */
+    .reveal{ opacity:0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .reveal.visible{ opacity:1; transform: none; }
+
+    /* Responsive tweaks */
+    @media (max-width:900px){
+      header{ padding:12px 28px }
+      .wrap{ padding:100px 4% 60px }
+      .hero h1{ font-size:28px }
+    }
+
+    @media (max-width:560px){
+      .brand{ font-size:18px }
+      nav a{ margin:0 10px; font-size:14px }
+      .icon{ width:48px; height:48px; font-size:22px }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="Image/Logo Web.jpg" alt="Logo" />
+      EDUVEST
+    </div>
+    <nav>
+      <a href="home.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="educations.html" class="active">EDUCATIONS</a>
+      <a href="articles.html">ARTICLES</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="wrap">
+    <section class="hero">
+      <h1>Dasar-Dasar Investasi Saham — Modul Interaktif</h1>
+      <p>
+        Pelajari konsep, istilah, manfaat, risiko, dan langkah praktis memulai investasi saham. Klik tiap kartu untuk membuka materi lengkap — cocok untuk pemula dan yang ingin menyegarkan pengetahuan.
+      </p>
+    </section>
+
+    <section class="grid">
+      <!-- Card 1: Pengertian Saham & Pasar Modal -->
+      <article class="card reveal" data-index="1">
+        <div class="meta">
+          <div class="icon">📘</div>
+          <div>
+            <h3>Pengertian Saham & Pasar Modal</h3>
+            <div class="excerpt">Apa itu saham, jenis-jenis saham, dan fungsi pasar modal secara ringkas.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d1">READ MORE</button>
+        </div>
+
+        <div class="details" id="d1">
+          <div class="content">
+            <div class="sep"></div>
+            <h4>a. Apa itu Saham?</h4>
+            <p><strong>Saham</strong> adalah bukti kepemilikan atas suatu perusahaan (PT). Memiliki saham berarti memiliki sebagian perusahaan sesuai jumlah saham.</p>
+            <p><strong>Contoh:</strong> Beli 1.000 lembar dari total 1.000.000 lembar = 0.1% kepemilikan.</p>
+
+            <h4>b. Jenis-Jenis Saham</h4>
+            <ul>
+              <li><strong>Saham Biasa (Common Stock)</strong> — hak suara di RUPS, berpotensi dividen.</li>
+              <li><strong>Saham Preferen (Preferred Stock)</strong> — prioritas dividen, umumnya tanpa hak suara.</li>
+            </ul>
+
+            <h4>c. Apa itu Pasar Modal?</h4>
+            <p>Tempat bertemunya emiten (pencari dana) dan investor. Di Indonesia diatur oleh OJK dan dijalankan BEI (IDX).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Cara Kerja Bursa Efek -->
+      <article class="card reveal" data-index="2">
+        <div class="meta">
+          <div class="icon">🏛️</div>
+          <div>
+            <h3>Cara Kerja Bursa Efek</h3>
+            <div class="excerpt">Langkah-langkah dari IPO sampai settlement (T+2) — proses transaksi saham.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d2">READ MORE</button>
+        </div>
+
+        <div class="details" id="d2">
+          <div class="content">
+            <div class="sep"></div>
+            <h4>1. IPO (Initial Public Offering)</h4>
+            <p>Perusahaan menawarkan sahamnya ke publik untuk pertama kali; setelah IPO, saham diperdagangkan di bursa.</p>
+
+            <h4>2. Membeli melalui Broker</h4>
+            <p>Investor membeli lewat perusahaan sekuritas (broker) yang terdaftar di OJK/BEI.</p>
+
+            <h4>3. Sistem Perdagangan</h4>
+            <p>Transaksi dicatat di sistem elektronik (mis. JATS). Semua order matching, reporting otomatis.</p>
+
+            <h4>4. Settlement (T+2)</h4>
+            <p>Proses penyelesaian/penyerahan saham dan dana oleh KSEI dalam 2 hari kerja setelah transaksi.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Cara Membuka Rekening Saham -->
+      <article class="card reveal" data-index="3">
+        <div class="meta">
+          <div class="icon">🧾</div>
+          <div>
+            <h3>Cara Membuka Rekening Saham</h3>
+            <div class="excerpt">Langkah praktis buka rekening efek & RDN, verifikasi, deposit, lalu mulai trading.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d3">READ MORE</button>
+        </div>
+
+        <div class="details" id="d3">
+          <div class="content">
+            <div class="sep"></div>
+            <ol>
+              <li><strong>Pilih Sekuritas</strong> — pastikan terdaftar OJK (contoh: BCA Sekuritas, Mandiri Sekuritas, IndoPremier).</li>
+              <li><strong>Isi Formulir & Verifikasi</strong> — unggah KTP, NPWP (opsional), data rekening bank.</li>
+              <li><strong>Buka RDN (Rekening Dana Nasabah)</strong> — rekening khusus untuk transfer dana transaksi saham.</li>
+              <li><strong>Aktivasi & SID</strong> — dapatkan SID (Single Investor Identification), nomor rekening efek.</li>
+              <li><strong>Deposit & Transaksi</strong> — setor dana ke RDN lalu mulai membeli lewat aplikasi broker.</li>
+            </ol>
+            <p>Biaya awal bervariasi; banyak sekuritas menyediakan pembukaan rekening secara online.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Istilah Penting -->
+      <article class="card reveal" data-index="4">
+        <div class="meta">
+          <div class="icon">📚</div>
+          <div>
+            <h3>Istilah Penting</h3>
+            <div class="excerpt">Glosarium ringkas: emiten, dividen, lot, IHSG, fundamental, teknikal, dll.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d4">READ MORE</button>
+        </div>
+
+        <div class="details" id="d4">
+          <div class="content">
+            <div class="sep"></div>
+            <table aria-label="Istilah penting">
+              <thead><tr><th>Istilah</th><th>Penjelasan</th></tr></thead>
+              <tbody>
+                <tr><td>Emiten</td><td>Perusahaan yang menjual sahamnya ke publik.</td></tr>
+                <tr><td>Investor</td><td>Pihak yang membeli saham untuk tujuan investasi.</td></tr>
+                <tr><td>Broker / Sekuritas</td><td>Perantara antara investor dan BEI.</td></tr>
+                <tr><td>IPO</td><td>Penawaran saham perdana kepada publik.</td></tr>
+                <tr><td>Dividen</td><td>Pembagian laba perusahaan kepada pemegang saham.</td></tr>
+                <tr><td>Lot</td><td>Satuan minimal transaksi (1 lot = 100 lembar).</td></tr>
+                <tr><td>IHSG</td><td>Indeks yang mencerminkan pergerakan keseluruhan saham di BEI.</td></tr>
+                <tr><td>Analisis Fundamental</td><td>Menilai kinerja perusahaan berdasarkan laporan keuangan.</td></tr>
+                <tr><td>Analisis Teknikal</td><td>Menilai pergerakan harga berdasarkan grafik & indikator.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Keuntungan & Risiko -->
+      <article class="card reveal" data-index="5">
+        <div class="meta">
+          <div class="icon">⚖️</div>
+          <div>
+            <h3>Keuntungan & Risiko</h3>
+            <div class="excerpt">Ringkasan manfaat (capital gain, dividen) dan risiko (capital loss, volatilitas).</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d5">READ MORE</button>
+        </div>
+
+        <div class="details" id="d5">
+          <div class="content">
+            <div class="sep"></div>
+            <h4>Keuntungan</h4>
+            <ul>
+              <li><strong>Capital Gain</strong> — keuntungan dari kenaikan harga saham.</li>
+              <li><strong>Dividen</strong> — pembagian laba perusahaan.</li>
+              <li><strong>Likuiditas</strong> — cukup mudah dijual kembali di pasar.</li>
+              <li><strong>Kepemilikan</strong> — menjadi bagian dari pemilik perusahaan.</li>
+            </ul>
+
+            <h4>Risiko</h4>
+            <ul>
+              <li><strong>Capital Loss</strong> — kerugian saat harga turun.</li>
+              <li><strong>Tidak Ada Dividen</strong> — perusahaan bisa saja tidak membayar dividen.</li>
+              <li><strong>Volatilitas</strong> — harga saham dapat berfluktuasi tajam.</li>
+              <li><strong>Risiko Likuidasi</strong> — jika perusahaan bangkrut, investor rugi besar.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Tips Pemula & Lembaga -->
+      <article class="card reveal" data-index="6">
+        <div class="meta">
+          <div class="icon">💡</div>
+          <div>
+            <h3>Tips Pemula & Lembaga Penting</h3>
+            <div class="excerpt">Praktik aman investasi + peran OJK, BEI, KSEI, KPEI, sekuritas.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn toggle" data-target="d6">READ MORE</button>
+        </div>
+
+        <div class="details" id="d6">
+          <div class="content">
+            <div class="sep"></div>
+            <h4>Tips untuk Investor Pemula</h4>
+            <ul>
+              <li>Pelajari dasar analisis fundamental dan teknikal.</li>
+              <li>Mulai dari saham Blue Chip yang relatif stabil.</li>
+              <li>Gunakan uang dingin (bukan modal kebutuhan pokok).</li>
+              <li>Diversifikasi portofolio; jangan taruh seluruh modal di satu saham.</li>
+              <li>Pantau laporan keuangan dan berita ekonomi secara berkala.</li>
+              <li>Fokus pada investasi jangka panjang bila belum terbiasa trading.</li>
+            </ul>
+
+            <h4>Lembaga Penting</h4>
+            <table>
+              <thead><tr><th>Lembaga</th><th>Fungsi Utama</th></tr></thead>
+              <tbody>
+                <tr><td>OJK</td><td>Mengatur & mengawasi pasar modal.</td></tr>
+                <tr><td>BEI (IDX)</td><td>Menyelenggarakan perdagangan saham.</td></tr>
+                <tr><td>KSEI</td><td>Menjamin penyimpanan & settlement efek.</td></tr>
+                <tr><td>KPEI</td><td>Kliring dan penjamin penyelesaian transaksi.</td></tr>
+                <tr><td>Perusahaan Sekuritas</td><td>Perantara transaksi investor dan bursa.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+    </section> <!-- grid end -->
+
+    <div style="text-align:center; margin-top:34px;">
+      <a href="educations.html" class="btn">BACK</a>
+    </div>
+  </main>
+
+  <script>
+    // Toggle expand/collapse
+    document.querySelectorAll('.toggle').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const id = btn.getAttribute('data-target');
+        const el = document.getElementById(id);
+        const open = el.classList.contains('open');
+
+        if(open){
+          // collapse
+          el.style.maxHeight = el.scrollHeight + 'px'; // set current to allow transition
+          requestAnimationFrame(()=> {
+            el.style.maxHeight = '0px';
+            el.classList.remove('open');
+          });
+        } else {
+          // expand
+          el.classList.add('open');
+          el.style.maxHeight = el.scrollHeight + 'px';
+          // after transition, remove maxHeight to allow dynamic content height
+          el.addEventListener('transitionend', function te(ev){
+            if(ev.propertyName === 'max-height'){
+              el.style.maxHeight = 'none';
+              el.removeEventListener('transitionend', te);
+            }
+          });
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    reveals.forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

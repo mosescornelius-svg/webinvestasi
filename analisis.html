@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analisis Fundamental - Eduvest</title>
+  <style>
+    :root{
+      --bg:#131e3d;
+      --accent:#d4af37;
+      --gold:#f0d18a;
+      --muted:#f5deb3;
+      --glass: rgba(10,15,30,0.9);
+      --card: rgba(255,255,255,0.03);
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      background:
+        linear-gradient(180deg, rgba(19,30,61,0.65), rgba(19,30,61,0.65)),
+        url('Image/background.jpg') center/cover fixed no-repeat;
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* header */
+    header{
+      position:fixed; top:0; left:0; right:0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 72px;
+      background: rgba(10,15,30,0.9);
+      z-index:120;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .brand{display:flex; align-items:center; gap:12px; color:var(--gold); font-weight:700;}
+    .brand img{width:36px; height:auto;}
+    nav a{ color:var(--accent); text-decoration:none; margin:0 16px; font-weight:600; transition:color .18s;}
+    nav a:hover, nav a.active{ color:#fff; }
+
+    main.wrap{ max-width:1100px; margin:110px auto 80px; padding: 0 24px; }
+
+    .hero{ text-align:center; margin-bottom:28px;}
+    .hero h1{ color:var(--gold); font-size:30px; margin-bottom:6px; letter-spacing:1px; }
+    .hero p{ color:var(--muted); max-width:960px; margin:0 auto; line-height:1.7; }
+
+    /* kontainer utama */
+    .stack{ display:flex; flex-direction:column; gap:20px; margin-top:18px; }
+
+    .panel{
+      background:var(--card);
+      border:1px solid rgba(212,175,55,0.1);
+      padding:18px;
+      border-radius:12px;
+      overflow:hidden;
+      transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+    }
+    .panel:hover{ transform: translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,0.5); }
+
+    .panel .head{
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .meta{ display:flex; align-items:center; gap:12px; }
+    .icon{
+      width:52px; height:52px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(255,255,255,0.02));
+      display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--gold);
+    }
+    .title{ color:var(--gold); font-size:18px; margin:0; }
+    .summary{ color:var(--muted); font-size:15px; margin-top:6px; }
+
+    .actions{ display:flex; gap:12px; align-items:center; margin-left:auto; }
+    .btn{
+      display:inline-block; padding:8px 14px; background:var(--accent); color:#071122; font-weight:700;
+      border-radius:8px; text-decoration:none; cursor:pointer; transition: background .18s, transform .12s;
+    }
+    .btn:hover{ background:var(--gold); transform:translateY(-2px); }
+
+    /* details collapsible */
+    .details{ max-height:0; overflow:hidden; opacity:0; transition: max-height .45s var(--ease), opacity .35s var(--ease) }
+    .details.open{ opacity:1; }
+
+    .content{ padding-top:12px; color:var(--muted); line-height:1.75; font-size:15px; }
+    .content h3{ color:var(--accent); margin-top:14px; }
+    .sep{ height:3px; width:72px; background: linear-gradient(90deg,var(--accent), rgba(212,175,55,0.5)); margin:10px 0 16px; border-radius:6px; }
+
+    /* tables */
+    table{ width:100%; border-collapse:collapse; margin-top:12px; background: rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.08); }
+    th,td{ padding:10px 12px; border-bottom:1px solid rgba(212,175,55,0.04); color:var(--muted); text-align:left; }
+    th{ color:var(--gold); background: rgba(212,175,55,0.04); }
+
+    /* small helper */
+    .muted{ color:var(--muted); font-size:14px; }
+    .code{ background: rgba(0,0,0,0.2); padding:6px 8px; border-radius:6px; color:var(--muted); display:inline-block; font-family:monospace; }
+
+    /* reveal on scroll */
+    .reveal{ opacity:0; transform:translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .reveal.visible{ opacity:1; transform:none; }
+
+    /* responsive */
+    @media (max-width:900px){
+      header{ padding:12px 22px; }
+      main.wrap{ margin-top:100px; padding:0 16px; }
+      .icon{ width:48px; height:48px; font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="Image/Logo Web.jpg" alt="Logo" />
+      EDUVEST
+    </div>
+    <nav>
+      <a href="home.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="educations.html">EDUCATIONS</a>
+      <a href="articles.html">ARTICLES</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="main">
+    <section class="hero">
+      <h1>Analisis Fundamental Saham</h1>
+      <p>Pelajari cara membaca laporan keuangan dan menghitung rasio keuangan penting untuk menilai kesehatan perusahaan dan menghitung nilai wajar saham. Klik <strong>READ MORE</strong> pada tiap bagian untuk melihat detail dan contoh perhitungan.</p>
+    </section>
+
+    <section class="stack">
+      <!-- Panel 1: Pengertian & Tujuan -->
+      <article class="panel reveal" data-i="1">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">🔎</div>
+            <div>
+              <div class="title">1. Pengertian Analisis Fundamental</div>
+              <div class="summary">Metode menilai nilai wajar saham dengan memeriksa laporan keuangan, manajemen, dan kondisi makro.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p1">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p1">
+          <div class="content">
+            <div class="sep"></div>
+            <h3>Apa itu Analisis Fundamental?</h3>
+            <p>Analisis fundamental menilai <strong>intrinsic value</strong> suatu saham berdasarkan kinerja keuangan perusahaan, prospek bisnis, kualitas manajemen, dan kondisi makroekonomi. Tujuannya untuk menentukan apakah saham <em>undervalued</em> atau <em>overvalued</em>.</p>
+
+            <h3>Tujuan Analisis Fundamental</h3>
+            <ul>
+              <li>Mengetahui kondisi keuangan perusahaan.</li>
+              <li>Menilai kemampuan laba berkelanjutan.</li>
+              <li>Menentukan nilai wajar untuk keputusan beli/jual.</li>
+              <li>Mengidentifikasi risiko jangka panjang.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 2: Komponen Makro & Mikro -->
+      <article class="panel reveal" data-i="2">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">🌐</div>
+            <div>
+              <div class="title">2. Komponen Analisis: Makro & Mikro</div>
+              <div class="summary">Bedakan fokus analisis ekonomi/industri (makro) dan perusahaan (mikro).</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p2">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p2">
+          <div class="content">
+            <div class="sep"></div>
+            <h3>Makro (Ekonomi & Industri)</h3>
+            <p>Meliputi pertumbuhan ekonomi, suku bunga, inflasi, harga komoditas, dan prospek industri. Faktor makro mempengaruhi permintaan dan margin perusahaan.</p>
+
+            <h3>Mikro (Perusahaan)</h3>
+            <p>Fokus pada laporan keuangan (neraca, laba-rugi, arus kas), kualitas manajemen, struktur modal, dan posisi kompetitif perusahaan.</p>
+
+            <table>
+              <thead><tr><th>Tingkat</th><th>Fokus</th><th>Contoh</th></tr></thead>
+              <tbody>
+                <tr><td>Makro</td><td>Kondisi ekonomi & industri</td><td>Inflasi, suku bunga, harga komoditas</td></tr>
+                <tr><td>Mikro</td><td>Kinerja perusahaan</td><td>Laba, aset, arus kas</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 3: Membaca Laporan Keuangan -->
+      <article class="panel reveal" data-i="3">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">📄</div>
+            <div>
+              <div class="title">3. Membaca Laporan Keuangan</div>
+              <div class="summary">Income Statement, Balance Sheet, Cash Flow, dan CALK — fungsi & apa yang dicermati.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p3">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p3">
+          <div class="content">
+            <div class="sep"></div>
+            <h3>A. Laporan Laba Rugi (Income Statement)</h3>
+            <p>Menunjukkan pendapatan, biaya, dan laba dalam periode. Komponen penting: <em>Revenue, COGS, Gross Profit, OPEX, EBIT, Interest, Tax, Net Profit</em>. Gunakan untuk menilai profitabilitas dan margin.</p>
+
+            <h3>B. Neraca (Balance Sheet)</h3>
+            <p>Neraca menunjukkan posisi aset, kewajiban, dan ekuitas pada suatu tanggal. Persamaan dasar: <span class="code">Aset = Liabilitas + Ekuitas</span>. Berguna untuk menilai solvabilitas dan struktur modal.</p>
+
+            <h3>C. Laporan Arus Kas (Cash Flow)</h3>
+            <p>Menampilkan arus kas dari aktivitas operasi, investasi, dan pendanaan. Penting untuk mengecek kualitas laba: apakah laba disertai arus kas nyata.</p>
+
+            <h3>D. Catatan atas Laporan Keuangan (CALK)</h3>
+            <p>CALK berisi kebijakan akuntansi dan rincian pos — seringkali mengungkap risiko tersembunyi (mis. penilaian aset, provisi, kontrak).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 4: Rasio Keuangan -->
+      <article class="panel reveal" data-i="4">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">📊</div>
+            <div>
+              <div class="title">4. Analisis Rasio Keuangan</div>
+              <div class="summary">Rasio likuiditas, solvabilitas, profitabilitas, aktivitas, dan pasar — rumus & arti.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p4">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p4">
+          <div class="content">
+            <div class="sep"></div>
+
+            <h3>A. Rasio Likuiditas</h3>
+            <table>
+              <thead><tr><th>Rasio</th><th>Rumus</th><th>Makna</th></tr></thead>
+              <tbody>
+                <tr><td>Current Ratio</td><td>Aset Lancar / Liabilitas Lancar</td><td>Kemampuan bayar jangka pendek (&gt;1 sehat)</td></tr>
+                <tr><td>Quick Ratio</td><td>(Aset Lancar – Persediaan) / Liabilitas Lancar</td><td>Likuiditas tanpa stok</td></tr>
+              </tbody>
+            </table>
+
+            <h3>B. Rasio Solvabilitas (Leverage)</h3>
+            <table>
+              <thead><tr><th>Rasio</th><th>Rumus</th><th>Makna</th></tr></thead>
+              <tbody>
+                <tr><td>Debt to Asset (DAR)</td><td>Total Utang / Total Aset</td><td>Proporsi aset yang dibiayai utang</td></tr>
+                <tr><td>Debt to Equity (DER)</td><td>Total Utang / Ekuitas</td><td>Keseimbangan utang & modal (&lt;1 ideal)</td></tr>
+                <tr><td>Interest Coverage</td><td>EBIT / Beban Bunga</td><td>Kemampuan bayar bunga (&gt;3 baik)</td></tr>
+              </tbody>
+            </table>
+
+            <h3>C. Rasio Profitabilitas</h3>
+            <table>
+              <thead><tr><th>Rasio</th><th>Rumus</th><th>Makna</th></tr></thead>
+              <tbody>
+                <tr><td>Gross Profit Margin</td><td>Laba Kotor / Penjualan ×100%</td><td>Efisiensi produksi</td></tr>
+                <tr><td>Net Profit Margin</td><td>Laba Bersih / Penjualan ×100%</td><td>Laba bersih per rupiah penjualan</td></tr>
+                <tr><td>ROA</td><td>Laba Bersih / Total Aset ×100%</td><td>Efisiensi aset</td></tr>
+                <tr><td>ROE</td><td>Laba Bersih / Ekuitas ×100%</td><td>Pengembalian kepada pemegang saham</td></tr>
+              </tbody>
+            </table>
+
+            <h3>D. Rasio Aktivitas & Pasar</h3>
+            <p>Termasuk Inventory Turnover, Receivable Turnover, EPS, PER, PBV, Dividend Yield — berguna untuk menilai efisiensi operasi dan valuasi pasar.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 5: Langkah Praktis -->
+      <article class="panel reveal" data-i="5">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">🛠️</div>
+            <div>
+              <div class="title">5. Langkah-Langkah Analisis Praktis</div>
+              <div class="summary">Panduan langkah demi langkah: kumpulkan data, hitung rasio, bandingkan, dan tentukan nilai wajar.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p5">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p5">
+          <div class="content">
+            <div class="sep"></div>
+            <ol>
+              <li>Kumpulkan laporan keuangan 3–5 tahun terakhir.</li>
+              <li>Analisis tren pendapatan dan laba (growth).</li>
+              <li>Hitung rasio utama: ROE, DER, PER, PBV, NPM.</li>
+              <li>Bandingkan dengan peer (perusahaan seindustri).</li>
+              <li>Perhitungkan faktor eksternal (ekonomi, suku bunga).</li>
+              <li>Hitung intrinsic value (mis. DCF atau PER wajar).</li>
+              <li>Keputusan: <em>Undervalued → Beli; Overvalued → Hindari/Jual</em>.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 6: Contoh Perhitungan -->
+      <article class="panel reveal" data-i="6">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">📈</div>
+            <div>
+              <div class="title">6. Contoh Singkat Analisis (Studi Kasus)</div>
+              <div class="summary">Perhitungan ROE, DER, EPS, PER, PBV untuk PT ABC Tbk (angka contoh).</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p6">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p6">
+          <div class="content">
+            <div class="sep"></div>
+            <p><strong>Data contoh:</strong></p>
+            <table>
+              <tbody>
+                <tr><th>Komponen</th><th>Nilai</th></tr>
+                <tr><td>Laba Bersih</td><td>Rp 500.000.000.000 (Rp 500 M)</td></tr>
+                <tr><td>Ekuitas</td><td>Rp 2.000.000.000.000 (Rp 2.000 M)</td></tr>
+                <tr><td>Total Aset</td><td>Rp 5.000.000.000.000 (Rp 5.000 M)</td></tr>
+                <tr><td>Utang</td><td>Rp 1.000.000.000.000 (Rp 1.000 M)</td></tr>
+                <tr><td>Penjualan</td><td>Rp 4.000.000.000.000 (Rp 4.000 M)</td></tr>
+                <tr><td>Jumlah Saham</td><td>1.000.000 lembar</td></tr>
+                <tr><td>Harga Saham</td><td>Rp 2.000</td></tr>
+              </tbody>
+            </table>
+
+            <h3>Perhitungan (langkah demi langkah)</h3>
+            <p><strong>1) ROE (Return on Equity)</strong><br>
+              ROE = Laba Bersih / Ekuitas = 500 M / 2000 M = 0.25 → <strong>25%</strong> (kinerja pemegang modal baik).
+            </p>
+
+            <p><strong>2) DER (Debt to Equity Ratio)</strong><br>
+              DER = Utang / Ekuitas = 1000 M / 2000 M = 0.5 → <strong>0.5</strong> (termasuk aman).
+            </p>
+
+            <p><strong>3) EPS (Earnings per Share)</strong><br>
+              EPS = Laba Bersih / Jumlah Saham = 500.000.000.000 / 1.000.000 = Rp 500 per lembar.
+            </p>
+
+            <p><strong>4) PER (Price to Earnings Ratio)</strong><br>
+              PER = Harga Saham / EPS = 2.000 / 500 = <strong>4x</strong> → relatif murah.
+            </p>
+
+            <p><strong>5) PBV (Price to Book Value)</strong><br>
+              Nilai Buku per Saham = Ekuitas / Jumlah Saham = 2.000.000.000.000 / 1.000.000 = Rp 2.000<br>
+              PBV = Harga Saham / Nilai Buku per Saham = 2.000 / 2.000 = <strong>1x</strong> → wajar.
+            </p>
+
+            <p><strong>Kesimpulan contoh:</strong> ROE tinggi (25%), DER rendah (0.5), PER kecil (4x), dan PBV 1x → saham tampak <em>undervalued</em> dan sehat secara fundamental berdasarkan data ini.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 7: Kesimpulan -->
+      <article class="panel reveal" data-i="7">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">✅</div>
+            <div>
+              <div class="title">7. Kesimpulan & Rekomendasi</div>
+              <div class="summary">Ringkasan: analisis fundamental cocok untuk investor jangka menengah-panjang.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn toggle" data-target="p7">READ MORE</button>
+          </div>
+        </div>
+
+        <div class="details" id="p7">
+          <div class="content">
+            <div class="sep"></div>
+            <p>Analisis fundamental membantu investor memilih perusahaan yang berkinerja baik dan berkelanjutan, menemukan saham undervalued, serta menghindari spekulasi berisiko. Metode ini cocok untuk investor jangka menengah ke panjang yang ingin membangun kekayaan melalui perusahaan yang tumbuh.</p>
+
+            <h3>Rekomendasi praktis</h3>
+            <ul>
+              <li>Gabungkan analisis fundamental & teknikal: fundamental menentukan <em>what</em>, teknikal menentukan <em>when</em>.</li>
+              <li>Gunakan minimal 3–5 tahun data keuangan untuk analisis tren.</li>
+              <li>Selalu bandingkan dengan peer di industri yang sama.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </section> <!-- stack end -->
+
+    <div style="text-align:center; margin-top:28px;">
+      <a href="educations.html" class="btn">BACK</a>
+    </div>
+  </main>
+
+  <script>
+    // collapse/expand logic
+    document.querySelectorAll('.toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-target');
+        const panel = document.getElementById(id);
+        const isOpen = panel.classList.contains('open');
+
+        if(isOpen){
+          // collapse
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(()=> {
+            panel.style.maxHeight = '0px';
+            panel.classList.remove('open');
+          });
+        } else {
+          panel.classList.add('open');
+          // set to scrollHeight for animation
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          // after open, remove fixed maxHeight to allow responsive height adjustments
+          const onEnd = (ev)=>{
+            if(ev.propertyName === 'max-height'){
+              panel.style.maxHeight = 'none';
+              panel.removeEventListener('transitionend', onEnd);
+            }
+          };
+          panel.addEventListener('transitionend', onEnd);
+        }
+      });
+    });
+
+    // reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+  </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Articles - Eduvest</title>
+  <style>
+    :root {
+      --bg:#131e3d;
+      --accent:#d4af37;
+      --gold:#f0d18a;
+      --muted:#f5deb3;
+      --card: rgba(255,255,255,0.05);
+      --glass: rgba(10,15,30,0.9);
+      --ease: cubic-bezier(.25,.8,.25,1);
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+
+    body {
+      font-family: Georgia, serif;
+      background:
+        linear-gradient(180deg, rgba(19,30,61,0.75), rgba(19,30,61,0.9)),
+        url('Image/background.jpg') center/cover fixed no-repeat;
+      color: var(--muted);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === HEADER (sama seperti halaman lain) === */
+    header {
+      position: fixed;
+      top:0; left:0; right:0;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--glass);
+      padding: 0 80px;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 20px;
+    }
+
+    .brand img {
+      width: 42px;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #fff;
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      text-align: center;
+      margin-top: 150px;
+      margin-bottom: 50px;
+    }
+
+    .hero h1 {
+      color: var(--gold);
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* === GRID ARTIKEL === */
+    main {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.5);
+    }
+
+    .thumb {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px 24px 28px;
+    }
+
+    .card h3 {
+      color: var(--gold);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--accent);
+      color: #071122;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    @media(max-width: 900px) {
+      header { padding: 0 24px; height: 75px; }
+      .hero h1 { font-size: 28px; }
+      nav a { margin: 0 10px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="Image/Logo Web.jpg" alt="Logo" />
+      EDUVEST
+    </div>
+    <nav>
+      <a href="home.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="educations.html">EDUCATIONS</a>
+      <a href="articles.html" class="active">ARTICLES</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Artikel & Wawasan Investasi</h1>
+    <p>Kumpulan artikel, tips, dan analisis terbaru untuk membantu kamu memahami dunia investasi saham dengan lebih dalam dan cerdas.</p>
+  </section>
+
+  <main>
+    <div class="grid">
+      <div class="card">
+        <img src="Image/art1.jpg" class="thumb" alt="Artikel 1">
+        <div class="card-content">
+          <h3>Strategi Investasi untuk Pemula</h3>
+          <p>Panduan langkah demi langkah bagi pemula agar dapat memulai investasi saham dengan aman dan terarah.</p>
+          <a href="strategi.html" class="btn">READ MORE</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Image/art2.jpg" class="thumb" alt="Artikel 2">
+        <div class="card-content">
+          <h3>Menilai Saham Undervalued</h3>
+          <p>Pelajari cara menemukan saham dengan harga lebih rendah dari nilai wajarnya menggunakan analisis fundamental.</p>
+          <a href="artikel2.html" class="btn">READ MORE</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Image/art3.jpg" class="thumb" alt="Artikel 3">
+        <div class="card-content">
+          <h3>Manajemen Risiko dalam Investasi</h3>
+          <p>Ketahui berbagai jenis risiko yang ada dalam investasi dan bagaimana strategi untuk meminimalkannya.</p>
+          <a href="artikel3.html" class="btn">READ MORE</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Image/art4.jpg" class="thumb" alt="Artikel 4">
+        <div class="card-content">
+          <h3>Analisis Fundamental vs Teknikal</h3>
+          <p>Temukan perbedaan mendasar antara kedua metode analisis saham ini dan kapan waktu terbaik menggunakannya.</p>
+          <a href="artikel4.html" class="btn">READ MORE</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

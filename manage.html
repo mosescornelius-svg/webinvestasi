@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manajemen Risiko Investasi - Eduvest</title>
+  <style>
+    :root{
+      --bg:#131e3d;
+      --accent:#d4af37;
+      --gold:#f0d18a;
+      --muted:#f5deb3;
+      --glass: rgba(10,15,30,0.9);
+      --card: rgba(255,255,255,0.03);
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      background:
+        linear-gradient(180deg, rgba(19,30,61,0.65), rgba(19,30,61,0.65)),
+        url('Image/background.jpg') center/cover fixed no-repeat;
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    header{
+      position:fixed; top:0; left:0; right:0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 72px;
+      background: rgba(10,15,30,0.9);
+      z-index:120;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .brand{display:flex; align-items:center; gap:12px; color:var(--gold); font-weight:700;}
+    .brand img{width:36px; height:auto;}
+    nav a{ color:var(--accent); text-decoration:none; margin:0 16px; font-weight:600; transition:color .18s;}
+    nav a:hover, nav a.active{ color:#fff; }
+
+    main.wrap{ max-width:1100px; margin:110px auto 80px; padding: 0 24px; }
+
+    .hero{ text-align:center; margin-bottom:28px;}
+    .hero h1{ color:var(--gold); font-size:30px; margin-bottom:6px; letter-spacing:1px; }
+    .hero p{ color:var(--muted); max-width:960px; margin:0 auto; line-height:1.7; }
+
+    .stack{ display:flex; flex-direction:column; gap:20px; margin-top:18px; }
+
+    .panel{
+      background:var(--card);
+      border:1px solid rgba(212,175,55,0.1);
+      padding:18px;
+      border-radius:12px;
+      overflow:hidden;
+      transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+    }
+    .panel:hover{ transform: translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,0.5); }
+
+    .panel .head{
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .meta{ display:flex; align-items:center; gap:12px; }
+    .icon{
+      width:52px; height:52px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(255,255,255,0.02));
+      display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--gold);
+    }
+    .title{ color:var(--gold); font-size:18px; margin:0; }
+    .summary{ color:var(--muted); font-size:15px; margin-top:6px; }
+
+    .actions{ display:flex; gap:12px; align-items:center; margin-left:auto; }
+    .btn{
+      display:inline-block; padding:8px 14px; background:var(--accent); color:#071122; font-weight:700;
+      border-radius:8px; text-decoration:none; cursor:pointer; transition: background .18s, transform .12s;
+    }
+    .btn:hover{ background:var(--gold); transform:translateY(-2px); }
+
+    .details{ max-height:0; overflow:hidden; opacity:0; transition: max-height .45s var(--ease), opacity .35s var(--ease) }
+    .details.open{ opacity:1; }
+
+    .content{ padding-top:12px; color:var(--muted); line-height:1.75; font-size:15px; }
+    .content h3{ color:var(--accent); margin-top:14px; }
+    .sep{ height:3px; width:72px; background: linear-gradient(90deg,var(--accent), rgba(212,175,55,0.5)); margin:10px 0 16px; border-radius:6px; }
+
+    @media (max-width:900px){
+      header{ padding:12px 22px; }
+      main.wrap{ margin-top:100px; padding:0 16px; }
+      .icon{ width:48px; height:48px; font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="Image/Logo Web.jpg" alt="Logo" />
+      EDUVEST
+    </div>
+    <nav>
+      <a href="home.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="educations.html">EDUCATIONS</a>
+      <a href="articles.html">ARTICLES</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="main">
+    <section class="hero">
+      <h1>Manajemen Risiko Investasi</h1>
+      <p>Pahami jenis-jenis risiko dalam investasi dan pelajari strategi untuk mengelolanya agar keputusan investasimu tetap cerdas, rasional, dan terukur.</p>
+    </section>
+
+    <section class="stack">
+      <!-- Panel 1 -->
+      <article class="panel reveal" data-i="1">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">⚖️</div>
+            <div>
+              <div class="title">1. Pengertian Risiko Investasi</div>
+              <div class="summary">Risiko adalah potensi perbedaan antara hasil yang diharapkan dan hasil yang diperoleh.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r1">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r1">
+          <div class="content">
+            <div class="sep"></div>
+            <p>Dalam investasi, risiko merupakan kemungkinan hasil aktual berbeda dari hasil yang diharapkan. Setiap jenis investasi memiliki tingkat risiko yang berbeda, tergantung pada faktor pasar, ekonomi, dan karakteristik aset tersebut.</p>
+            <p>Tujuan utama manajemen risiko adalah bukan menghindari risiko sepenuhnya, tetapi **mengidentifikasi, memahami, dan mengendalikan risiko agar tetap dalam batas yang dapat diterima.**</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 2 -->
+      <article class="panel reveal" data-i="2">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">📉</div>
+            <div>
+              <div class="title">2. Jenis-Jenis Risiko Investasi</div>
+              <div class="summary">Kenali berbagai risiko yang dapat memengaruhi hasil investasi kamu.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r2">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r2">
+          <div class="content">
+            <div class="sep"></div>
+            <ul>
+              <li><strong>Risiko Pasar:</strong> Terjadi akibat fluktuasi harga saham, obligasi, atau nilai tukar.</li>
+              <li><strong>Risiko Likuiditas:</strong> Kesulitan menjual aset karena tidak ada pembeli.</li>
+              <li><strong>Risiko Kredit:</strong> Pihak penerbit gagal memenuhi kewajiban (default).</li>
+              <li><strong>Risiko Inflasi:</strong> Nilai uang menurun, daya beli berkurang.</li>
+              <li><strong>Risiko Suku Bunga:</strong> Perubahan suku bunga memengaruhi nilai aset keuangan.</li>
+              <li><strong>Risiko Spesifik Perusahaan:</strong> Terkait manajemen, kinerja, atau kasus hukum emiten.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 3 -->
+      <article class="panel reveal" data-i="3">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">🧭</div>
+            <div>
+              <div class="title">3. Prinsip Dasar Manajemen Risiko</div>
+              <div class="summary">Langkah strategis untuk mengidentifikasi dan mengendalikan risiko investasi.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r3">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r3">
+          <div class="content">
+            <div class="sep"></div>
+            <ol>
+              <li><strong>Identifikasi Risiko</strong> — mengenali potensi kerugian yang mungkin terjadi.</li>
+              <li><strong>Analisis Risiko</strong> — menilai dampak dan probabilitas risiko tersebut.</li>
+              <li><strong>Evaluasi Risiko</strong> — menentukan prioritas dan tingkat toleransi risiko.</li>
+              <li><strong>Pengendalian Risiko</strong> — mengambil tindakan untuk mengurangi atau mengalihkan risiko.</li>
+              <li><strong>Monitoring</strong> — meninjau secara berkala efektivitas strategi pengelolaan risiko.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 4 -->
+      <article class="panel reveal" data-i="4">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">💡</div>
+            <div>
+              <div class="title">4. Strategi Mengelola Risiko Investasi</div>
+              <div class="summary">Teknik praktis untuk menjaga portofolio tetap aman dan optimal.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r4">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r4">
+          <div class="content">
+            <div class="sep"></div>
+            <ul>
+              <li><strong>Diversifikasi:</strong> Menyebar investasi pada berbagai instrumen untuk mengurangi risiko.</li>
+              <li><strong>Asset Allocation:</strong> Menentukan porsi ideal antara saham, obligasi, dan kas sesuai profil risiko.</li>
+              <li><strong>Stop Loss & Take Profit:</strong> Menetapkan batas kerugian dan keuntungan sebelum bertransaksi.</li>
+              <li><strong>Hedging:</strong> Menggunakan instrumen derivatif seperti opsi atau futures untuk melindungi nilai portofolio.</li>
+              <li><strong>Rebalancing:</strong> Menyesuaikan kembali komposisi portofolio secara berkala agar sesuai tujuan.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 5 -->
+      <article class="panel reveal" data-i="5">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">🧮</div>
+            <div>
+              <div class="title">5. Mengukur Risiko: Risk dan Return</div>
+              <div class="summary">Keseimbangan antara potensi keuntungan dan potensi kerugian investasi.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r5">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r5">
+          <div class="content">
+            <div class="sep"></div>
+            <p>Setiap peluang keuntungan selalu diiringi risiko. Pengukuran risiko dapat dilakukan dengan beberapa cara, seperti:</p>
+            <ul>
+              <li><strong>Standar Deviasi:</strong> Mengukur volatilitas harga aset.</li>
+              <li><strong>Beta:</strong> Mengukur sensitivitas harga saham terhadap pasar.</li>
+              <li><strong>Value at Risk (VaR):</strong> Mengestimasi potensi kerugian maksimum dalam jangka waktu tertentu.</li>
+              <li><strong>Sharpe Ratio:</strong> Mengukur efisiensi imbal hasil terhadap risiko yang diambil.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 6 -->
+      <article class="panel reveal" data-i="6">
+        <div class="head">
+          <div class="meta">
+            <div class="icon">✅</div>
+            <div>
+              <div class="title">6. Kesimpulan & Rekomendasi</div>
+              <div class="summary">Manajemen risiko adalah fondasi utama dalam keputusan investasi yang sehat.</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn toggle" data-target="r6">READ MORE</button>
+          </div>
+        </div>
+        <div class="details" id="r6">
+          <div class="content">
+            <div class="sep"></div>
+            <p>Manajemen risiko membantu investor bertahan dalam kondisi pasar yang tidak menentu dan tetap fokus pada tujuan jangka panjang.</p>
+            <ul>
+              <li>Kenali profil risikomu sebelum berinvestasi.</li>
+              <li>Gunakan prinsip diversifikasi dan alokasi aset.</li>
+              <li>Evaluasi dan pantau portofolio secara rutin.</li>
+              <li>Ingat: “Risk comes from not knowing what you're doing” – Warren Buffett.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div style="text-align:center; margin-top:28px;">
+      <a href="educations.html" class="btn">BACK</a>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('.toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-target');
+        const panel = document.getElementById(id);
+        const isOpen = panel.classList.contains('open');
+        if(isOpen){
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(()=>{
+            panel.style.maxHeight = '0px';
+            panel.classList.remove('open');
+          });
+        } else {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          const onEnd = (ev)=>{
+            if(ev.propertyName === 'max-height'){
+              panel.style.maxHeight = 'none';
+              panel.removeEventListener('transitionend', onEnd);
+            }
+          };
+          panel.addEventListener('transitionend', onEnd);
+        }
+      });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+  </script>
+</body>
+</html>

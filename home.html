@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduvest - Investasi Cerdas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #f0d18a;
+            background-image: url('Image/background.jpg');
+            background-size: cover;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: rgba(10, 15, 30, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #f0d18a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 30px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        ul li a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        ul li a:hover, ul li a.active {
+            color: white;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            line-height: 1.2;
+            color: #f5d48a;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #f5deb3;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #d4af37;
+            color: #0a0f1e;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #f0d18a;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="Image/Logo Web.jpg" alt="logo">
+            EDUVEST
+        </div>
+        <ul>
+            <li><a href="home.html" class="active">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="educations.html">EDUCATIONS</a></li>
+            <li><a href="#">ARTICLES</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>INVESTASI CERDAS<br>MASA DEPAN BERKUALITAS</h1>
+          <p>Investasi bukan sekadar menabung,<br>tetapi cara membangun masa depan yang lebih baik.</p>
+            <a href="educations.html" class="btn">PELAJARI LEBIH LANJUT</a>
+        </div>
+    </section>
+</body>
+</html>
